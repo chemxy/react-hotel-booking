@@ -67,6 +67,8 @@ profile page
   - room id (101, 102...201, 202,...301,..305...,311,...)
   - room name
   - room reserved flag
+  - room reserved start date 
+  - room reserved start date
   - room price
   - room facilitations (those could be tags on the frontend?)
     - beds
