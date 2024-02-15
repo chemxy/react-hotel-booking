@@ -4,7 +4,10 @@ const {hash} = require('bcrypt');
 const {v4: generateId} = require('uuid');
 const {isValidText, isValidEmail} = require("../utils/validation");
 const {createJSONToken, isValidPassword} = require("../utils/auth");
-const fs = require("node:fs/promises");
+const {readData, writeData} = require("../utils/file");
+
+
+const database = 'databases/users.json';
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -75,19 +78,19 @@ router.post('/login', async (req, res) => {
 
 
 async function add(data) {
-    let storedData = await readData();
+    let storedData = await readData(database);
     const userId = generateId();
     const hashedPw = await hash(data.password, 12);
     if (!storedData) {
         storedData = [];
     }
     storedData.push({...data, password: hashedPw, id: userId, reservations: []});
-    await writeData(storedData);
+    await writeData(database, storedData);
     return {id: userId, email: data.email};
 }
 
 async function get(email) {
-    const storedData = await readData();
+    const storedData = await readData(database);
     if (!storedData || storedData.length === 0) {
         throw new Error('Could not find any users.');
     }
@@ -98,15 +101,6 @@ async function get(email) {
     }
 
     return user;
-}
-
-async function readData() {
-    const data = await fs.readFile('databases/users.json', 'utf8');
-    return JSON.parse(data);
-}
-
-async function writeData(data) {
-    await fs.writeFile('databases/users.json', JSON.stringify(data));
 }
 
 module.exports = router;
