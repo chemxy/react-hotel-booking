@@ -7,10 +7,6 @@ const database = 'databases/rooms.json';
 /* GET rooms listing. */
 router.get('/all', async function (req, res, next) {
     console.log("get all rooms")
-    // const startDate = req.query.startDate;
-    // const endDate = req.query.endDate;
-
-    // if (startDate && endDate) {
 
     let storedData = await readData(database);
     if (!storedData) {
@@ -18,10 +14,6 @@ router.get('/all', async function (req, res, next) {
     }
     return res.status(200).json({message: "ok", rooms: storedData});
 
-    // }
-    // return res.status(400).json({
-    //     message: 'please provide a valid start date and end date'
-    // });
 });
 
 router.get('/room', async function (req, res, next) {
