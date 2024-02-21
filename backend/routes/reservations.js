@@ -1,5 +1,5 @@
 const express = require('express');
-const {readData} = require("../utils/file");
+const {readData, writeData} = require("../utils/file");
 const router = express.Router();
 
 const database = 'databases/reservations.json';
@@ -38,7 +38,28 @@ router.get('/reservation', async function (req, res, next) {
 });
 
 /*create a reservation*/
-router.post('/reserve', function (req, res, next) {
+router.post('/reserve', async function (req, res, next) {
+    /*
+    * room id
+    * start date
+    * end date
+    * */
+
+    const roomId = req.body.roomId;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+
+    //TODO verify room id
+
+    if (startDate && isValidDate(startDate) && endDate && isValidDate(endDate)) {
+        let storedData = await readData(database);
+        if (!storedData) {
+            storedData = [];
+        }
+        storedData.push({...data, roomId: roomId, startDate: startDate, endDate: endDate});
+        await writeData(database, storedData);
+    }
+
     res.send('reserve a room ');
 });
 

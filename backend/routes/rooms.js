@@ -32,10 +32,4 @@ router.post('/reserve', function (req, res, next) {
     res.send('reserve a room ');
 });
 
-function isValidDate(dateString) {
-    console.log(new Date(dateString));
-    //TODO validate date format yyyy-mm-dd
-    return true;
-}
-
 module.exports = router;
