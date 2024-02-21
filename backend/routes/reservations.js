@@ -20,7 +20,7 @@ router.get('/all', async function (req, res, next) {
         if (isValidDate(startDate) && isValidDate(endDate)) {
 
             //TODO filter based on date
-            return res.status(200).json({message: "ok", reservations: reservations});
+            return res.status(200).json({message: "ok", reservations: reservations}); //TODO hide user email
 
         } else {
             return res.status(400).json({message: "please provide a valid date range"});
@@ -49,7 +49,7 @@ router.get('/room', async function (req, res, next) {
         }
     }
 
-    return res.status(200).json({message: "ok", reservation: reservations});
+    return res.status(200).json({message: "ok", reservation: reservations}); //TODO hide user email
 
 });
 
@@ -71,7 +71,7 @@ router.get('/user', async function (req, res, next) {
             return res.status(400).json({message: "please provide a valid date range"});
         }
     }
-    return res.status(200).json({message: "ok", reservation: reservations});
+    return res.status(200).json({message: "ok", reservation: reservations}); //TODO hide user email
 
 
 });
