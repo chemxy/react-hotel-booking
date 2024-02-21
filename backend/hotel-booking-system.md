@@ -28,31 +28,45 @@ profile page
 
 # Backend
 
-- get available hotels: GET /rooms/all?startdate=20221120&enddate=20221122
+- get available hotels: GET http://localhost:3201/rooms/all
 
-- get a hotel by id: GET /rooms/room?id=201
+- get a hotel by id: GET http://localhost:3201/room?id=101
 
-- book a room: POST /rooms/reserve
+- get all reservations for the given room: GET http://localhost:3201/reservations/room?id=102
+
+- get all reservations for the given date: GET http://localhost:3201/reservations/all?startDate=2022-11-02&endDate=2022-11-04
+
+- reserve a room: POST http://localhost:3201/reservations/reserve
 
   {
 
-  room id: 
+    "roomId": "102",
 
-  room name:
+    "startDate": "2022-11-02",
 
-  start date:
+    "endDate": "2022-11-04",
 
-  end date:
+    "email": "test@test.com"
 
   }
 
-- login: POST /users/login
+- user login: POST http://localhost:3201/users/login
 
   {
 
-  username:
+    "email":"test@tes1t.com",
 
-  password:
+    "password":"test123"
+
+  }
+
+- user signup: POST http://localhost:3201/users/signup
+
+  {
+
+    "email":"test@test.com",
+
+    "password":"test123"
 
   }
 
