@@ -3,6 +3,7 @@
     "id": "101",
     "name": "room 1",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -13,6 +14,7 @@
     "id": "102",
     "name": "room 2",
     "price": 180,
+    "image": "http://localhost:3201/images/room102.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -23,6 +25,7 @@
     "id": "103",
     "name": "room 3",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -33,6 +36,8 @@
     "id": "104",
     "name": "room 4",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -43,6 +48,7 @@
     "id": "105",
     "name": "room 5",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -53,6 +59,7 @@
     "id": "106",
     "name": "room 6",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -63,6 +70,7 @@
     "id": "107",
     "name": "room 7",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -73,6 +81,7 @@
     "id": "108",
     "name": "room 8",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -83,6 +92,7 @@
     "id": "109",
     "name": "room 9",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -93,6 +103,7 @@
     "id": "110",
     "name": "room 10",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -103,6 +114,7 @@
     "id": "111",
     "name": "room 11",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -113,6 +125,7 @@
     "id": "112",
     "name": "room 12",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -123,6 +136,7 @@
     "id": "113",
     "name": "room 13",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -133,6 +147,7 @@
     "id": "114",
     "name": "room 14",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -143,6 +158,7 @@
     "id": "115",
     "name": "room 15",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -153,6 +169,7 @@
     "id": "116",
     "name": "room 16",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -163,6 +180,7 @@
     "id": "201",
     "name": "room 17",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -173,6 +191,7 @@
     "id": "202",
     "name": "room 18",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -183,6 +202,7 @@
     "id": "203",
     "name": "room 19",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -193,6 +213,7 @@
     "id": "204",
     "name": "room 20",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -203,6 +224,7 @@
     "id": "205",
     "name": "room 21",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -213,6 +235,7 @@
     "id": "206",
     "name": "room 22",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -223,6 +246,7 @@
     "id": "207",
     "name": "room 23",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -233,6 +257,7 @@
     "id": "208",
     "name": "room 24",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
@@ -243,6 +268,7 @@
     "id": "209",
     "name": "room 25",
     "price": 180,
+    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
