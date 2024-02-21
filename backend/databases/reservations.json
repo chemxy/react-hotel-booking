@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "reservationId": "da5bb6ff-7e75-497f-a68c-79a23d51ddfc",
+    "roomId": "103",
+    "startDate": "2022-11-03",
+    "endDate": "2022-11-05"
+  },
+  {
+    "reservationId": "31f9565b-5699-4cdd-8712-62ad35dfee35",
+    "roomId": "102",
+    "startDate": "2022-11-02",
+    "endDate": "2022-11-04"
+  },
+  {
+    "reservationId": "deb8f508-06e4-40c0-bcdd-52e84556c511",
+    "roomId": "101",
+    "startDate": "2022-11-12",
+    "endDate": "2022-11-14"
+  }
+]

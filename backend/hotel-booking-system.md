@@ -3,10 +3,9 @@
 home page
 
 - user should land on the home page by default.
-- user should see a search criterial on the home page.
-- user should see recommended hotels based on the distance from close to far.
+- user should see a search criterial on the home page..
 
-search page
+search results page
 
 - user should be able to view the available hotels on a desired date range.
   - user should be able to book a hotel that is currently available, with specified duration.  

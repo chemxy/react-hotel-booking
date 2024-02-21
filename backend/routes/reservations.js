@@ -1,6 +1,7 @@
 const express = require('express');
 const {readData, writeData} = require("../utils/file");
 const router = express.Router();
+const {v4: generateId} = require('uuid');
 
 const database = 'databases/reservations.json';
 
@@ -16,7 +17,7 @@ router.get('/all', async function (req, res, next) {
         if (!storedData) {
             storedData = [];
         }
-        return res.status(200).json({message: "ok", rooms: storedData});
+        return res.status(200).json({message: "ok", reservations: storedData});
 
     }
     return res.status(400).json({
@@ -25,12 +26,12 @@ router.get('/all', async function (req, res, next) {
 });
 
 /*get reservation by id*/
-router.get('/reservation', async function (req, res, next) {
+router.get('/room', async function (req, res, next) {
     console.log("get room by id");
-    const reservationId = req.query.id;
+    const roomId = req.query.id;
 
     let storedData = await readData(database);
-    const reservation = storedData.find(item => item.id === reservationId);
+    const reservation = storedData.find(item => item.roomId === roomId);
     if (reservation)
         return res.status(200).json({message: "ok", reservation: reservation});
     else
@@ -44,7 +45,7 @@ router.post('/reserve', async function (req, res, next) {
     * start date
     * end date
     * */
-
+    console.log("book a room")
     const roomId = req.body.roomId;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
@@ -56,11 +57,18 @@ router.post('/reserve', async function (req, res, next) {
         if (!storedData) {
             storedData = [];
         }
-        storedData.push({...data, roomId: roomId, startDate: startDate, endDate: endDate});
+        const reservationId = generateId();
+
+        storedData.push({
+            reservationId: reservationId,
+            roomId: roomId,
+            startDate: startDate,
+            endDate: endDate
+        });
         await writeData(database, storedData);
     }
 
-    res.send('reserve a room ');
+    return res.status(200).json({message: "room booked"});
 });
 
 function isValidDate(dateString) {
