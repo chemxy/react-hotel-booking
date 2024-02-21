@@ -2,8 +2,6 @@
   {
     "id": "101",
     "name": "room 1",
-    "reservationStart": "2022-11-12",
-    "reservationEnd": "2022-11-13",
     "price": 180,
     "facilities": [
       "wifi",
