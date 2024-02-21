@@ -72,12 +72,16 @@ profile page
     - wifi
     - TV
     - ...
+  
 - reservation model
   - room model
   - start date
   - end date
   - paid flag (advanced)
+  
 - user model:
   - username
+  
   - password
-  - reservation history / reservation list3
+  
+    

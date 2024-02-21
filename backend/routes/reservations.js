@@ -47,10 +47,11 @@ router.post('/reserve', async function (req, res, next) {
     * */
     console.log("book a room")
     const roomId = req.body.roomId;
+    const email = req.body.email;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
 
-    //TODO verify room id
+    //TODO verify room id & user email
 
     if (startDate && isValidDate(startDate) && endDate && isValidDate(endDate)) {
         let storedData = await readData(database);
@@ -61,6 +62,7 @@ router.post('/reserve', async function (req, res, next) {
 
         storedData.push({
             reservationId: reservationId,
+            email: email,
             roomId: roomId,
             startDate: startDate,
             endDate: endDate
