@@ -4,7 +4,7 @@ const router = express.Router();
 
 const database = 'databases/rooms.json';
 
-/* GET rooms listing. */
+/* GET all rooms */
 router.get('/all', async function (req, res, next) {
     console.log("get all rooms")
 
@@ -16,6 +16,7 @@ router.get('/all', async function (req, res, next) {
 
 });
 
+/*get room by room id*/
 router.get('/room', async function (req, res, next) {
     console.log("get room by id");
     const roomId = req.query.id;
@@ -26,10 +27,6 @@ router.get('/room', async function (req, res, next) {
         return res.status(200).json({message: "ok", room: room});
     else
         res.send('no room found ');
-});
-
-router.post('/reserve', function (req, res, next) {
-    res.send('reserve a room ');
 });
 
 module.exports = router;
