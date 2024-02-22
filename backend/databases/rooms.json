@@ -37,7 +37,6 @@
     "name": "room 4",
     "price": 180,
     "image": "http://localhost:3201/images/room103.jpg",
-    "image": "http://localhost:3201/images/room103.jpg",
     "facilities": [
       "wifi",
       "beds",
