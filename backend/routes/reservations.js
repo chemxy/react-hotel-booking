@@ -2,7 +2,7 @@ const express = require('express');
 const {readData, writeData} = require("../utils/file");
 const router = express.Router();
 const {v4: generateId} = require('uuid');
-const {isValidDate} = require("../utils/validation");
+const {isValidDate, isValidEmail} = require("../utils/validation");
 const {getAllRoomsFromDatabase} = require("./rooms");
 
 const database = 'databases/reservations.json';
@@ -91,6 +91,10 @@ router.get('/user', async function (req, res, next) {
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
 
+    if(!isValidEmail(email)){
+        return res.status(400).json({message: "please provide a valid email"});
+    }
+
     let storedData = await getAllReservationsFromDatabase();
     const reservationsForUser = storedData.filter(item => item.email === email);
 
@@ -121,11 +125,14 @@ router.post('/reserve', async function (req, res, next) {
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
 
-    //TODO verify room id & user email
-    const rooms = await getAllRoomsFromDatabase();
-    if(!rooms.find(item => item.roomId === roomId)){
-        return res.status(400).json({message: "please provide a valid room id"});
+    if(!isValidEmail(email)){
+        return res.status(400).json({message: "please provide a valid email"});
     }
+    // const rooms = await getAllRoomsFromDatabase();
+    // if(!rooms.find(item => item.roomId === roomId)){
+    //     return res.status(400).json({message: "please provide a valid room id"});
+    // }
+
 
     if (startDate && isValidDate(startDate) && endDate && isValidDate(endDate)) {
         let storedData = getAllReservationsFromDatabase();
