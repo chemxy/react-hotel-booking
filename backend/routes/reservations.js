@@ -23,7 +23,7 @@ function filterReservationByDate(startDateString, endDateString, storedData) {
         const endDate = Date.parse(endDateString);
 
         // filter based on date
-        reservations = storedData.filter(item => Date.parse(item.startDate) >= startDate && Date.parse(item.endDate) <= endDate);
+        reservations = storedData.filter(item => Date.parse(item.endDate) >= startDate && Date.parse(item.startDate) <= endDate);
 
     } else {
         throw Error('invalid date')
@@ -122,7 +122,10 @@ router.post('/reserve', async function (req, res, next) {
     const endDate = req.body.endDate;
 
     //TODO verify room id & user email
-    // const rooms = getAllRoomsFromDatabase();
+    const rooms = await getAllRoomsFromDatabase();
+    if(!rooms.find(item => item.roomId === roomId)){
+        return res.status(400).json({message: "please provide a valid room id"});
+    }
 
     if (startDate && isValidDate(startDate) && endDate && isValidDate(endDate)) {
         let storedData = getAllReservationsFromDatabase();
