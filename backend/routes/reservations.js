@@ -8,8 +8,8 @@ const database = 'databases/reservations.json';
 /* GET all reservation listing for a given date range */
 router.get('/all', async function (req, res, next) {
     console.log("get all reservations")
-    const startDate = req.query.startDate;
-    const endDate = req.query.endDate;
+    const startDate = req.query.startDate; //YYYY-MM-DD
+    const endDate = req.query.endDate;//YYYY-MM-DD
 
     let storedData = await readData(database);
     if (!storedData) {
@@ -111,9 +111,12 @@ router.post('/reserve', async function (req, res, next) {
     return res.status(200).json({message: "room booked"});
 });
 
+
+
 function isValidDate(dateString) {
     console.log(new Date(dateString));
     //TODO validate date format yyyy-mm-dd
+
     return true;
 }
 
