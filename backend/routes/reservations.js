@@ -51,14 +51,13 @@ router.get('/all', async function (req, res, next) {
     if (startDate && endDate) {
         try {
             let reservations = filterReservationByDate(startDate, endDate, storedData);
-            reservations = hideUSerInfo(reservations);
-            return res.status(200).json({message: "ok", reservations: reservations}); //TODO hide user email
+            return res.status(200).json({message: "ok", reservations: hideUSerInfo(reservations)});
         } catch (e) {
             return res.status(400).json({message: "please provide a valid date range"});
         }
     }
 
-    return res.status(200).json({message: "ok", reservations: storedData});
+    return res.status(200).json({message: "ok", reservations: hideUSerInfo(storedData)});
 });
 
 /*get all reservations by room id and/or date range*/
@@ -75,14 +74,13 @@ router.get('/room', async function (req, res, next) {
     if (startDate && endDate) {
         try {
             let reservations = filterReservationByDate(startDate, endDate, storedData);
-            reservations = hideUSerInfo(reservations);
-            return res.status(200).json({message: "ok", reservations: reservations}); //TODO hide user email
+            return res.status(200).json({message: "ok", reservations: hideUSerInfo(reservations)});
         } catch (e) {
             return res.status(400).json({message: "please provide a valid date range"});
         }
     }
 
-    return res.status(200).json({message: "ok", reservation: reservationsForRoom}); //TODO hide user email
+    return res.status(200).json({message: "ok", reservation: hideUSerInfo(reservationsForRoom)});
 
 });
 
@@ -99,13 +97,12 @@ router.get('/user', async function (req, res, next) {
     if (startDate && endDate) {
         try {
             let reservations = filterReservationByDate(startDate, endDate, storedData);
-            reservations = hideUSerInfo(reservations);
-            return res.status(200).json({message: "ok", reservations: reservations}); //TODO hide user email
+            return res.status(200).json({message: "ok", reservations: hideUSerInfo(reservations)});
         } catch (e) {
             return res.status(400).json({message: "please provide a valid date range"});
         }
     }
-    return res.status(200).json({message: "ok", reservation: reservationsForUser}); //TODO hide user email
+    return res.status(200).json({message: "ok", reservation: hideUSerInfo(reservationsForUser)});
 
 
 });
