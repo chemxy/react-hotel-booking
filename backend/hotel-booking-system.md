@@ -28,11 +28,15 @@ profile page
 
 # Backend
 
-- get available hotels: GET http://localhost:3201/rooms/all
+- get available rooms: GET http://localhost:3201/rooms/all
 
-- get a hotel by id: GET http://localhost:3201/room?id=101
+- get a room by id: GET http://localhost:3201/room?id=101
+
+  
 
 - get all reservations for the given room: GET http://localhost:3201/reservations/room?id=102
+
+- get all reservations for the given room: GET http://localhost:3201/reservations/user?email=test@test.com
 
 - get all reservations for the given date: GET http://localhost:3201/reservations/all?startDate=2022-11-02&endDate=2022-11-04
 
@@ -49,6 +53,8 @@ profile page
     "email": "test@test.com"
 
   }
+
+  
 
 - user login: POST http://localhost:3201/users/login
 
