@@ -28,7 +28,7 @@ profile page
 
 # Backend
 
-- get available rooms: GET http://localhost:3201/rooms/all
+- get all rooms: GET http://localhost:3201/rooms/all
 
 - get a room by id: GET http://localhost:3201/room?id=101
 
