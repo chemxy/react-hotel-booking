@@ -111,6 +111,7 @@ router.get('/user', async function (req, res, next) {
 
 });
 
+/* check if a room is available on a date*/
 router.post('/available', async function (req, res, next) {
     const roomId = req.body.roomId;
     const date = req.body.date;
