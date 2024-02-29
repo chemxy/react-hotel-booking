@@ -73,7 +73,7 @@ router.get('/room', async function (req, res, next) {
 
     if (startDate && endDate) {
         try {
-            let reservations = filterReservationByDate(startDate, endDate, storedData);
+            let reservations = filterReservationByDate(startDate, endDate, reservationsForRoom);
             return res.status(200).json({message: "ok", reservations: hideUSerInfo(reservations)});
         } catch (e) {
             return res.status(400).json({message: "please provide a valid date range"});
@@ -91,7 +91,7 @@ router.get('/user', async function (req, res, next) {
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
 
-    if(!isValidEmail(email)){
+    if (!isValidEmail(email)) {
         return res.status(400).json({message: "please provide a valid email"});
     }
 
@@ -100,7 +100,7 @@ router.get('/user', async function (req, res, next) {
 
     if (startDate && endDate) {
         try {
-            let reservations = filterReservationByDate(startDate, endDate, storedData);
+            let reservations = filterReservationByDate(startDate, endDate, reservationsForUser);
             return res.status(200).json({message: "ok", reservations: hideUSerInfo(reservations)});
         } catch (e) {
             return res.status(400).json({message: "please provide a valid date range"});
@@ -110,6 +110,20 @@ router.get('/user', async function (req, res, next) {
 
 
 });
+
+router.post('/available', async function (req, res, next) {
+    const roomId = req.body.roomId;
+    const date = req.body.date;
+
+    let storedData = await getAllReservationsFromDatabase();
+    const reservationsForRoom = storedData.filter(item => item.roomId === roomId);
+    try {
+        let reservations = filterReservationByDate(date, date, reservationsForRoom);
+        return reservations.length === 0 ? res.status(200).json({message: "not found"}) : res.status(200).json({message: "found"});
+    } catch (e) {
+        return res.status(400).json({message: "please provide a valid date or room id"});
+    }
+})
 
 /*create a reservation*/
 router.post('/reserve', async function (req, res, next) {
@@ -125,14 +139,13 @@ router.post('/reserve', async function (req, res, next) {
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
 
-    if(!isValidEmail(email)){
+    if (!isValidEmail(email)) {
         return res.status(400).json({message: "please provide a valid email"});
     }
     // const rooms = await getAllRoomsFromDatabase();
     // if(!rooms.find(item => item.roomId === roomId)){
     //     return res.status(400).json({message: "please provide a valid room id"});
     // }
-
 
     if (startDate && isValidDate(startDate) && endDate && isValidDate(endDate)) {
         let storedData = getAllReservationsFromDatabase();
