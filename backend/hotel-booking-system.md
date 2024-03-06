@@ -95,14 +95,16 @@ profile page
     - ...
   
 - reservation model
-  - room model
+  - room id (RK)
   - start date
   - end date
-  - paid flag (advanced)
+  - user id  (RK)
   
 - user model:
   - username
   
   - password
+  
+  - user id
   
     
