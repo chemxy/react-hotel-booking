@@ -48,7 +48,12 @@ router.get('/room', async function (req, res, next) {
     console.log("get room by id");
     const roomId = req.query.id;
 
-    let storedData = await getAllRoomsFromDatabase();
+    let storedData;
+    try {
+        storedData = await getAllRoomsFromDatabase();
+    } catch (error) {
+        return res.status(500).json({error: error.message});
+    }
     const room = storedData.find(item => item.id === roomId);
     if (room)
         return res.status(200).json({message: "ok", room: room});
