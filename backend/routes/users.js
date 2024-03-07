@@ -5,13 +5,24 @@ const {v4: generateId} = require('uuid');
 const {isValidText, isValidEmail} = require("../utils/validation");
 const {createJSONToken, isValidPassword} = require("../utils/auth");
 const {readData, writeData} = require("../utils/file");
-
+const pgp = require('pg-promise')(/* options */);
+const db = pgp('postgres://postgres:2333@localhost:5432/reactdb');
 
 const database = 'databases/users.json';
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('get users');
+router.get('/all', async function (req, res, next) {
+    console.log('get users');
+    let result;
+    await db.any('SELECT * from users;')
+        .then((data) => {
+            console.log('DATA:', data)
+            result = data;
+        })
+        .catch((error) => {
+            console.log('ERROR:', error)
+        })
+    res.json({users:result});
 });
 
 router.post('/signup', async (req, res, next) => {
@@ -84,7 +95,7 @@ async function add(data) {
     if (!storedData) {
         storedData = [];
     }
-    storedData.push({...data, password: hashedPw, id: userId, reservations: []});
+    storedData.push({...data, password: hashedPw, id: userId});
     await writeData(database, storedData);
     return {id: userId, email: data.email};
 }

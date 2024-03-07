@@ -2,6 +2,13 @@
   {
     "email": "test@test.com",
     "password": "$2b$12$IwLmXRvaXXPMECvIUxVVmO57/L16.oDr3lAVaUl2GYpnRfj8R4vsu",
-    "id": "a68f3e9d-2db0-4a42-b3de-02f193850240"
+    "id": "a68f3e9d-2db0-4a42-b3de-02f193850240",
+    "name": "test user"
+  },
+  {
+    "email": "test@test1.com",
+    "password": "$2b$12$Pe6QRz7bUvi8iYv.6EVzAuT.td81g.1cF7a5fGlGD/VNkp65elwNG",
+    "name": "test user",
+    "id": "d2399c4f-2049-4715-9c3c-4d862a858813"
   }
 ]
