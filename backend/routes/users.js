@@ -5,14 +5,14 @@ const {v4: generateId} = require('uuid');
 const {isValidText, isValidEmail} = require("../utils/validation");
 const {createJSONToken, isValidPassword} = require("../utils/auth");
 const { writeData} = require("../utils/file");
-const {getAllReservationsFromDatabase} = require("../utils/database");
+const {getAllUsersFromDatabase} = require("../utils/database");
 
 const database = 'databases/users.json';
 
 /* GET users listing. */
 router.get('/all', async function (req, res, next) {
     console.log('get users');
-    let storedData = await getAllReservationsFromDatabase();
+    let storedData = await getAllUsersFromDatabase();
     res.json({users: storedData});
 });
 
@@ -80,7 +80,7 @@ router.post('/login', async (req, res) => {
 
 
 async function add(data) {
-    let storedData = await getAllReservationsFromDatabase();
+    let storedData = await getAllUsersFromDatabase();
     const userId = generateId();
     const hashedPw = await hash(data.password, 12);
     if (!storedData) {
@@ -92,7 +92,7 @@ async function add(data) {
 }
 
 async function get(email) {
-    let storedData = await getAllReservationsFromDatabase();
+    let storedData = await getAllUsersFromDatabase();
     if (!storedData || storedData.length === 0) {
         throw new Error('Could not find any users.');
     }

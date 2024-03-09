@@ -60,5 +60,6 @@ async function getAllReservationsFromDatabase() {
     return result;
 }
 
+exports.getAllUsersFromDatabase = getAllUsersFromDatabase;
 exports.getAllRoomsFromDatabase = getAllRoomsFromDatabase;
 exports.getAllReservationsFromDatabase = getAllReservationsFromDatabase;
