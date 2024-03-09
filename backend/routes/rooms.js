@@ -1,33 +1,6 @@
 const express = require('express');
-const {readData} = require("../utils/file");
+const {getAllRoomsFromDatabase} = require("../utils/database");
 const router = express.Router();
-
-const pgp = require('pg-promise')(/* options */);
-const db = pgp('postgres://postgres:2333@localhost:5432/reactdb');
-
-const database = 'databases/rooms.json';
-
-const getAllRoomsQuery = 'SELECT * from rooms;';
-
-async function getAllRoomsFromDatabase() {
-    // let storedData = await readData(database);
-    // if (!storedData) {
-    //     storedData = [];
-    // }
-    // return storedData;
-
-    let result;
-    await db.any(getAllRoomsQuery)
-        .then((data) => {
-            console.log('DATA:', data)
-            result = data;
-        })
-        .catch((error) => {
-            console.log('ERROR:', error)
-            throw Error(error);
-        })
-    return result;
-}
 
 /* GET all rooms */
 router.get('/all', async function (req, res, next) {

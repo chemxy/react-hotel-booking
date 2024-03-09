@@ -1,19 +1,13 @@
 const express = require('express');
-const {readData, writeData} = require("../utils/file");
+const {writeData} = require("../utils/file");
 const router = express.Router();
 const {v4: generateId} = require('uuid');
 const {isValidDate, isValidEmail} = require("../utils/validation");
-const {getAllRoomsFromDatabase} = require("./rooms");
+const {getAllReservationsFromDatabase} = require("../utils/database");
+
 
 const database = 'databases/reservations.json';
 
-async function getAllReservationsFromDatabase() {
-    let storedData = await readData(database);
-    if (!storedData) {
-        storedData = [];
-    }
-    return storedData;
-}
 
 function filterReservationByDate(startDateString, endDateString, storedData) {
     let reservations = []

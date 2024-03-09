@@ -5,25 +5,15 @@ const {v4: generateId} = require('uuid');
 const {isValidText, isValidEmail} = require("../utils/validation");
 const {createJSONToken, isValidPassword} = require("../utils/auth");
 const {readData, writeData} = require("../utils/file");
-const pgp = require('pg-promise')(/* options */);
-const db = pgp('postgres://postgres:2333@localhost:5432/reactdb');
+const {getAllReservationsFromDatabase} = require("../utils/database");
 
 const database = 'databases/users.json';
 
-const getAllUsersQuery = 'SELECT * from users;';
 /* GET users listing. */
 router.get('/all', async function (req, res, next) {
     console.log('get users');
-    let result;
-    await db.any(getAllUsersQuery)
-        .then((data) => {
-            console.log('DATA:', data)
-            result = data;
-        })
-        .catch((error) => {
-            console.log('ERROR:', error)
-        })
-    res.json({users:result});
+    let storedData = await getAllReservationsFromDatabase();
+    res.json({users: storedData});
 });
 
 router.post('/signup', async (req, res, next) => {
