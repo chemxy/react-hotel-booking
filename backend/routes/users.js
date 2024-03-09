@@ -4,7 +4,7 @@ const {hash} = require('bcrypt');
 const {v4: generateId} = require('uuid');
 const {isValidText, isValidEmail} = require("../utils/validation");
 const {createJSONToken, isValidPassword} = require("../utils/auth");
-const {readData, writeData} = require("../utils/file");
+const { writeData} = require("../utils/file");
 const {getAllReservationsFromDatabase} = require("../utils/database");
 
 const database = 'databases/users.json';
@@ -80,7 +80,7 @@ router.post('/login', async (req, res) => {
 
 
 async function add(data) {
-    let storedData = await readData(database);
+    let storedData = await getAllReservationsFromDatabase();
     const userId = generateId();
     const hashedPw = await hash(data.password, 12);
     if (!storedData) {
@@ -92,7 +92,7 @@ async function add(data) {
 }
 
 async function get(email) {
-    const storedData = await readData(database);
+    let storedData = await getAllReservationsFromDatabase();
     if (!storedData || storedData.length === 0) {
         throw new Error('Could not find any users.');
     }
