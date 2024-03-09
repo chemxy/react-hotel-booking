@@ -34,6 +34,4 @@ router.get('/room', async function (req, res, next) {
         res.send('no room found ');
 });
 
-exports.getAllRoomsFromDatabase = getAllRoomsFromDatabase;
-
 module.exports = router;
