@@ -124,6 +124,8 @@ router.post('/reserve', async function (req, res, next) {
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
 
+    //TODO check if the time has already been booked
+    
     // const rooms = await getAllRoomsFromDatabase();
     // if(!rooms.find(item => item.roomId === roomId)){
     //     return res.status(400).json({message: "please provide a valid room id"});
