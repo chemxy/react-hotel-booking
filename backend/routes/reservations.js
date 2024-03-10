@@ -1,13 +1,8 @@
 const express = require('express');
-const {writeData} = require("../utils/file");
 const router = express.Router();
 const {v4: generateId} = require('uuid');
 const {isValidDate, isValidEmail} = require("../utils/validation");
 const {getAllReservations, insertReservation} = require("../utils/database");
-
-
-const database = 'databases/reservations.json';
-
 
 function filterReservationByDate(startDateString, endDateString, storedData) {
     let reservations = []
