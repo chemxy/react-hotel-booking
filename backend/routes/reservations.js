@@ -122,38 +122,21 @@ router.get('/available', async function (req, res, next) {
 
 /*create a reservation*/
 router.post('/reserve', async function (req, res, next) {
-    /*
-    * room id
-    * user email
-    * start date
-    * end date
-    * */
+
     console.log("book a room")
     const roomId = req.body.roomId;
     const userId = req.body.userId;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
 
-    // if (!isValidEmail(email)) {
-    //     return res.status(400).json({message: "please provide a valid email"});
-    // }
     // const rooms = await getAllRoomsFromDatabase();
     // if(!rooms.find(item => item.roomId === roomId)){
     //     return res.status(400).json({message: "please provide a valid room id"});
     // }
 
     if (startDate && isValidDate(startDate) && endDate && isValidDate(endDate)) {
-        // let storedData = getAllReservations();
         const reservationId = generateId();
 
-        // storedData.push({
-        //     reservationId: reservationId,
-        //     email: email,
-        //     roomId: roomId,
-        //     startDate: startDate,
-        //     endDate: endDate
-        // });
-        // await writeData(database, storedData);
         try {
             await insertReservation(reservationId, startDate, endDate, userId, roomId);
         } catch (error) {
