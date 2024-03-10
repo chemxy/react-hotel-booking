@@ -3,7 +3,7 @@ const {writeData} = require("../utils/file");
 const router = express.Router();
 const {v4: generateId} = require('uuid');
 const {isValidDate, isValidEmail} = require("../utils/validation");
-const {getAllReservationsFromDatabase} = require("../utils/database");
+const {getAllReservations, insertReservation} = require("../utils/database");
 
 
 const database = 'databases/reservations.json';
@@ -17,7 +17,7 @@ function filterReservationByDate(startDateString, endDateString, storedData) {
         const endDate = Date.parse(endDateString);
 
         // filter based on date
-        reservations = storedData.filter(item => Date.parse(item.endDate) >= startDate && Date.parse(item.startDate) <= endDate);
+        reservations = storedData.filter(item => Date.parse(item.enddate) >= startDate && Date.parse(item.startdate) <= endDate);
 
     } else {
         throw Error('invalid date')
@@ -40,7 +40,7 @@ router.get('/all', async function (req, res, next) {
     const startDate = req.query.startDate; //YYYY-MM-DD
     const endDate = req.query.endDate;//YYYY-MM-DD
 
-    let storedData = await getAllReservationsFromDatabase();
+    let storedData = await getAllReservations();
 
     if (startDate && endDate) {
         try {
@@ -61,7 +61,7 @@ router.get('/room', async function (req, res, next) {
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
 
-    let storedData = await getAllReservationsFromDatabase();
+    let storedData = await getAllReservations();
 
     const reservationsForRoom = storedData.filter(item => item.roomId === roomId);
 
@@ -89,7 +89,7 @@ router.get('/user', async function (req, res, next) {
         return res.status(400).json({message: "please provide a valid email"});
     }
 
-    let storedData = await getAllReservationsFromDatabase();
+    let storedData = await getAllReservations();
     const reservationsForUser = storedData.filter(item => item.email === email);
 
     if (startDate && endDate) {
@@ -106,12 +106,12 @@ router.get('/user', async function (req, res, next) {
 });
 
 /* check if a room is available on a date*/
-router.post('/available', async function (req, res, next) {
-    const roomId = req.body.roomId;
-    const date = req.body.date;
+router.get('/available', async function (req, res, next) {
+    const roomId = req.query.roomId;
+    const date = req.query.date;
 
-    let storedData = await getAllReservationsFromDatabase();
-    const reservationsForRoom = storedData.filter(item => item.roomId === roomId);
+    let storedData = await getAllReservations();
+    const reservationsForRoom = storedData.filter(item => item.roomid == roomId);
     try {
         let reservations = filterReservationByDate(date, date, reservationsForRoom);
         return reservations.length === 0 ? res.status(200).json({message: "not found"}) : res.status(200).json({message: "found"});
@@ -130,30 +130,36 @@ router.post('/reserve', async function (req, res, next) {
     * */
     console.log("book a room")
     const roomId = req.body.roomId;
-    const email = req.body.email;
+    const userId = req.body.userId;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
 
-    if (!isValidEmail(email)) {
-        return res.status(400).json({message: "please provide a valid email"});
-    }
+    // if (!isValidEmail(email)) {
+    //     return res.status(400).json({message: "please provide a valid email"});
+    // }
     // const rooms = await getAllRoomsFromDatabase();
     // if(!rooms.find(item => item.roomId === roomId)){
     //     return res.status(400).json({message: "please provide a valid room id"});
     // }
 
     if (startDate && isValidDate(startDate) && endDate && isValidDate(endDate)) {
-        let storedData = getAllReservationsFromDatabase();
+        // let storedData = getAllReservations();
         const reservationId = generateId();
 
-        storedData.push({
-            reservationId: reservationId,
-            email: email,
-            roomId: roomId,
-            startDate: startDate,
-            endDate: endDate
-        });
-        await writeData(database, storedData);
+        // storedData.push({
+        //     reservationId: reservationId,
+        //     email: email,
+        //     roomId: roomId,
+        //     startDate: startDate,
+        //     endDate: endDate
+        // });
+        // await writeData(database, storedData);
+        try {
+            await insertReservation(reservationId, startDate, endDate, userId, roomId);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({message: "error insert reservation"});
+        }
     }
 
     return res.status(200).json({message: "room booked"});

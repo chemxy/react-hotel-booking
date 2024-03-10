@@ -1,5 +1,5 @@
 const express = require('express');
-const {getAllRoomsFromDatabase} = require("../utils/database");
+const {getAllRooms} = require("../utils/database");
 const router = express.Router();
 
 /* GET all rooms */
@@ -7,7 +7,7 @@ router.get('/all', async function (req, res, next) {
     console.log("get all rooms")
     let storedData;
     try {
-        storedData = await getAllRoomsFromDatabase();
+        storedData = await getAllRooms();
     } catch (error) {
         return res.status(500).json({error: error.message});
     }
@@ -23,7 +23,7 @@ router.get('/room', async function (req, res, next) {
 
     let storedData;
     try {
-        storedData = await getAllRoomsFromDatabase();
+        storedData = await getAllRooms();
     } catch (error) {
         return res.status(500).json({error: error.message});
     }
