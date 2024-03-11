@@ -4,10 +4,7 @@ const {hash} = require('bcrypt');
 const {v4: generateId} = require('uuid');
 const {isValidText, isValidEmail} = require("../utils/validation");
 const {createJSONToken, isValidPassword} = require("../utils/auth");
-const {writeData} = require("../utils/file");
 const {getAllUsers, insertUser} = require("../utils/database");
-
-const database = 'databases/users.json';
 
 /* GET users listing. */
 router.get('/all', async function (req, res, next) {
