@@ -2,6 +2,7 @@ const pgp = require('pg-promise')(/* options */);
 const db = pgp('postgres://postgres:2333@localhost:5432/reactdb');
 
 const getAllUsersQuery = 'SELECT * from users;';
+const insertUSerQuery = 'INSERT INTO users VALUES(${id}, ${email}, ${name}, ${password});';
 const getAllRoomsQuery = 'SELECT * from rooms;';
 const getAllReservationsQuery = 'SELECT * from reservations;';
 const insertReservationQuery = 'INSERT INTO reservations VALUES(${id}, ${startDate}, ${endDate}, ${userId}, ${roomId});';
@@ -20,6 +21,17 @@ async function getAllUsers() {
         })
     return result;
 }
+
+async function insertUser(user) {
+
+    await db.none(insertUSerQuery, {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        password: user.password
+    })
+}
+
 
 async function getAllRooms() {
     let result;
@@ -63,3 +75,4 @@ exports.getAllUsers = getAllUsers;
 exports.getAllRooms = getAllRooms;
 exports.getAllReservations = getAllReservations;
 exports.insertReservation = insertReservation;
+exports.insertUser = insertUser;

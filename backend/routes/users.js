@@ -4,8 +4,8 @@ const {hash} = require('bcrypt');
 const {v4: generateId} = require('uuid');
 const {isValidText, isValidEmail} = require("../utils/validation");
 const {createJSONToken, isValidPassword} = require("../utils/auth");
-const { writeData} = require("../utils/file");
-const {getAllUsers} = require("../utils/database");
+const {writeData} = require("../utils/file");
+const {getAllUsers, insertUser} = require("../utils/database");
 
 const database = 'databases/users.json';
 
@@ -80,14 +80,16 @@ router.post('/login', async (req, res) => {
 
 
 async function add(data) {
-    let storedData = await getAllUsers();
+
     const userId = generateId();
     const hashedPw = await hash(data.password, 12);
-    if (!storedData) {
-        storedData = [];
+    const user = {
+        id: userId,
+        email: data.email,
+        name: data.name,
+        password: hashedPw
     }
-    storedData.push({...data, password: hashedPw, id: userId});
-    await writeData(database, storedData);
+    await insertUser(user);
     return {id: userId, email: data.email};
 }
 
