@@ -2,7 +2,7 @@ const pgp = require('pg-promise')(/* options */);
 const db = pgp('postgres://postgres:2333@localhost:5432/reactdb');
 
 const getAllUsersQuery = 'SELECT * from users;';
-const getAvailableRoomsByDates = 'select * from rooms where not exists (select roomid from reservations where rooms.roomid = reservations.roomid);';
+// const getAvailableRoomsByDates = `select * from rooms where not exists (select roomid from reservations where rooms.roomid = reservations.roomid and reservations.startdate >= Date('${startDate}'));`;
 const insertUSerQuery = 'INSERT INTO users VALUES(${id}, ${email}, ${name}, ${password});';
 const getAllRoomsQuery = 'SELECT * from rooms;';
 const getAllReservationsQuery = 'SELECT * from reservations;';

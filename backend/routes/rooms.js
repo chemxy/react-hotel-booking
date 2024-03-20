@@ -1,9 +1,10 @@
 const express = require('express');
 const {getAllRooms} = require("../utils/database");
+const {checkAuthMiddleware} = require("../utils/auth");
 const router = express.Router();
 
 /* GET all rooms */
-router.get('/all', async function (req, res, next) {
+router.get('/all', checkAuthMiddleware, async function (req, res, next) {
     console.log("get all rooms")
     let storedData;
     try {
