@@ -16,8 +16,9 @@ router.get('/all', async function (req, res, next) {
 router.post('/signup', async (req, res, next) => {
     const data = req.body;
     let errors = {};
-
+    console.log(req.body);
     if (!isValidEmail(data.email)) {
+        console.log("invalid email");
         errors.email = 'Invalid email.';
     } else {
         try {
@@ -31,6 +32,7 @@ router.post('/signup', async (req, res, next) => {
     }
 
     if (!isValidText(data.password, 6)) {
+        console.log("invalid password");
         errors.password = 'Invalid password. Must be at least 6 characters long.';
     }
 
@@ -42,7 +44,9 @@ router.post('/signup', async (req, res, next) => {
     }
 
     try {
+        console.log("before add user")
         const createdUser = await add(data);
+        console.log("after add user")
         // const authToken = createJSONToken(createdUser.email);
         res
             .status(200)
@@ -77,7 +81,7 @@ router.post('/login', async (req, res) => {
 
 
 async function add(data) {
-
+    console.log(`adding user ${data}`);
     const userId = generateId();
     const hashedPw = await hash(data.password, 12);
     const user = {
@@ -86,7 +90,9 @@ async function add(data) {
         name: data.name,
         password: hashedPw
     }
+    console.log(`before insert user ${user}`);
     await insertUser(user);
+    console.log("after insert user")
     return {id: userId, email: data.email};
 }
 
