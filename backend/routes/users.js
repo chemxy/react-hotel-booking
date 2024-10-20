@@ -4,21 +4,21 @@ const {hash} = require('bcrypt');
 const {v4: generateId} = require('uuid');
 const {isValidText, isValidEmail} = require("../utils/validation");
 const {createJSONToken, isValidPassword} = require("../utils/auth");
-const {getAllUsers, insertUser} = require("../utils/database");
+const {readData, writeData} = require("../utils/file");
+
+
+const database = 'databases/users.json';
 
 /* GET users listing. */
-router.get('/all', async function (req, res, next) {
-    console.log('get users');
-    let storedData = await getAllUsers();
-    res.json({users: storedData});
+router.get('/', function (req, res, next) {
+    res.send('get users');
 });
 
 router.post('/signup', async (req, res, next) => {
     const data = req.body;
     let errors = {};
-    console.log(req.body);
+
     if (!isValidEmail(data.email)) {
-        console.log("invalid email");
         errors.email = 'Invalid email.';
     } else {
         try {
@@ -32,7 +32,6 @@ router.post('/signup', async (req, res, next) => {
     }
 
     if (!isValidText(data.password, 6)) {
-        console.log("invalid password");
         errors.password = 'Invalid password. Must be at least 6 characters long.';
     }
 
@@ -44,9 +43,7 @@ router.post('/signup', async (req, res, next) => {
     }
 
     try {
-        console.log("before add user")
         const createdUser = await add(data);
-        console.log("after add user")
         // const authToken = createJSONToken(createdUser.email);
         res
             .status(200)
@@ -81,23 +78,19 @@ router.post('/login', async (req, res) => {
 
 
 async function add(data) {
-    console.log(`adding user ${data}`);
+    let storedData = await readData(database);
     const userId = generateId();
     const hashedPw = await hash(data.password, 12);
-    const user = {
-        id: userId,
-        email: data.email,
-        name: data.name,
-        password: hashedPw
+    if (!storedData) {
+        storedData = [];
     }
-    console.log(`before insert user ${user}`);
-    await insertUser(user);
-    console.log("after insert user")
+    storedData.push({...data, password: hashedPw, id: userId, reservations: []});
+    await writeData(database, storedData);
     return {id: userId, email: data.email};
 }
 
 async function get(email) {
-    let storedData = await getAllUsers();
+    const storedData = await readData(database);
     if (!storedData || storedData.length === 0) {
         throw new Error('Could not find any users.');
     }

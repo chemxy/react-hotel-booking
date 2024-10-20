@@ -40,8 +40,6 @@ profile page
 
 - get all reservations for the given date: GET http://localhost:3201/reservations/all?startDate=2022-11-02&endDate=2022-11-04
 
-- get if a room is available on a date: GET http://localhost:3201/RESERVATIONS/available?roomId=101&date=2022-11-13
-
 - reserve a room: POST http://localhost:3201/reservations/reserve
 
   {
