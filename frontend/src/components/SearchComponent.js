@@ -25,7 +25,7 @@ export function SearchComponent() {
 
 
     return (
-        <div className="">
+        <div className="text-3xl font-bold underline">
             dsadsa
             {rooms.map(room => {
                 return (
